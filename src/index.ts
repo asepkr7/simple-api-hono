@@ -1,9 +1,10 @@
 import { Hono } from 'hono'
+import { cors } from 'hono/cors'
 import { Routes } from './routes/index'
-// import { serve } from "@hono/node";
+
 const app = new Hono().basePath('/api')
-// app.basePath('/api')
-app.route('/user', Routes)
+app.use('*', cors())
+app.route('/', Routes)
 
 
 export default app;

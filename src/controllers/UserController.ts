@@ -5,7 +5,15 @@ export const getUsers = async (c: Context) => {
 
     try{
         console.log(c.req.url); 
-    const users = await prisma.user.findMany({orderBy: {id: 'asc'}});
+    const users = await prisma.user.findMany({ select: {
+        id: true,
+        name: true,
+        email: true,
+      },
+      orderBy: {
+        id: "desc",
+      },
+    });
     return c.json({
         success: true,
         data: users,
